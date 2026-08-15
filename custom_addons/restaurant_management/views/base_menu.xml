@@ -15,7 +15,7 @@
         parent="restaurant_root_menu"
         action="tables_action"
     />
-    
+
     <menuitem
         id="restaurant_menu"
         name="Menu"
@@ -43,5 +43,29 @@
         name="Items"
         parent="restaurant_menu"
         action="items_action"
+    />
+
+    <record id="customers_action" model = "ir.actions.act_window">
+        <field name="name">Customers Action</field>
+        <field name = "res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_restaurant_customer', '=', True)]</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'view_mode': 'tree',
+                'view_id': ref('customer_tree_view')
+            }),
+            (0, 0, {
+                'view_mode': 'form',
+                'view_id': ref('customer_form_view')
+            })
+        ]"/>
+    </record>
+    <menuitem
+        id="restaurant_customer_menu"
+        name="Customers"
+        parent="restaurant_root_menu"
+        action="customers_action"
     />
 </odoo>

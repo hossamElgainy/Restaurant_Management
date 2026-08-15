@@ -9,7 +9,8 @@
         'views/base_menu.xml',
         'views/restaurant_table_view.xml',
         'views/restaurant_menu_category_view.xml',
-        'views/restaurant_menu_item_view.xml'
+        'views/restaurant_menu_item_view.xml',
+        'views/restaurant_customer_view.xml'
     ],
     'application': True,
     'installable': True,
