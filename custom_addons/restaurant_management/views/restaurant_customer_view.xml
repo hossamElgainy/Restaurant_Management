@@ -26,6 +26,19 @@
                         <field name="email"/>
                         <field name="is_restaurant_customer"/>
                     </group>
+                    <notebook>
+                        <page string="Orders">
+                            <field name="order_ids">
+                                <tree>
+                                    <field name="order_no"/>
+                                    <field name="waiter_id"/>
+                                    <field name="table_id"/>
+                                    <field name="order_date"/>
+                                    <field name="total_amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

@@ -10,7 +10,9 @@
         'views/restaurant_table_view.xml',
         'views/restaurant_menu_category_view.xml',
         'views/restaurant_menu_item_view.xml',
-        'views/restaurant_customer_view.xml'
+        'views/restaurant_customer_view.xml',
+        'data/ir_sequence_data.xml',
+        'views/restaurant_order_view.xml'
     ],
     'application': True,
     'installable': True,

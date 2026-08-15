@@ -17,7 +17,6 @@ class RestaurantTable(models.Model):
         ('occupied', 'Occupied'),
     ], default='available')
 
-
     @api.constrains('capacity')
     def _check_capacity(self):
         for table in self:

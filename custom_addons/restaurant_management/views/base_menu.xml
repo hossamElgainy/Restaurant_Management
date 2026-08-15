@@ -16,6 +16,17 @@
         action="tables_action"
     />
 
+    <record id="orders_action" model="ir.actions.act_window">
+        <field name="name">restaurant order action</field>
+        <field name="res_model">restaurant.order</field>
+    </record>
+    <menuitem
+        id="restaurant_order_menu"
+        name="Orders"
+        parent="restaurant_root_menu"
+        action="orders_action"
+    />
+
     <menuitem
         id="restaurant_menu"
         name="Menu"

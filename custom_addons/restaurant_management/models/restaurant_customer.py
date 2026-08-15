@@ -5,3 +5,7 @@ class RestaurantCustomer(models.Model):
     _inherit = 'res.partner'
 
     is_restaurant_customer = fields.Boolean(default=False)
+
+    order_ids = fields.One2many(
+        'restaurant.order',
+        'customer_id',string='Orders')
