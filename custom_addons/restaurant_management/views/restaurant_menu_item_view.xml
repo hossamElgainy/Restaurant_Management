@@ -1,0 +1,52 @@
+<odoo>
+
+    <record id="item_tree_view" model="ir.ui.view">
+        <field name="name">Item Tree View</field>
+        <field name="model">restaurant.menu.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="image" widget="image" options="{'size': [80, 80]}"/>
+                <field name="name"/>
+                <field name="price"/>
+                <field name="category_id"/>
+                <field name="available"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="item_form_view" model="ir.ui.view">
+        <field name="name">Item Form View</field>
+        <field name="model">restaurant.menu.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="image" widget="image" options="{'size': [80, 80]}"/>
+                        <field name="name"/>
+                        <field name="category_id"/>
+                        <field name="available"/>
+                        <field name="description"/>
+                        <field name="price"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+   <record id="restaurant_menu_item_view_search" model="ir.ui.view">
+        <field name="name">Restaurant Item Search</field>
+        <field name="model">restaurant.menu.item</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="available" string="Available Items" domain="[('available','=',True)]" />
+                <group string="Group By">
+                    <filter
+                        string="Category"
+                        name="group_by_category"
+                        context="{'group_by': 'category_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

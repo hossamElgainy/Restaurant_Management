@@ -20,10 +20,10 @@
                 <sheet>
 
                     <group>
-                          <field name="name"/>
-                <field name="capacity"/>
-                <field name="location"/>
-                <field name="state"/>
+                        <field name="name"/>
+                        <field name="capacity"/>
+                        <field name="location"/>
+                        <field name="state"/>
                     </group>
 
                 </sheet>
@@ -31,39 +31,18 @@
         </field>
     </record>
 
-    <!--<record id="todo_view_search" model="ir.ui.view">
-        <field name="name">To Do Search</field>
-        <field name="model">todo.task</field>
+   <record id="restaurant_table_view_search" model="ir.ui.view">
+        <field name="name">Restaurant Table Search</field>
+        <field name="model">restaurant.table</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <field name="assign_to"/>
-                <filter name="is_new" string="New Tasks" domain="[('status','=','new')]" />
-                <filter name="is_in_progress" string="In Progress Tasks" domain="[('status','=','in-progress')]" />
-                <filter name="is_completed" string="Completed Tasks" domain="[('status','=','completed')]" />
-                 <separator/>
-
-                <group expand="0" string="Group By">
-                    <filter name="group_assign_to"
-                            string="Assigned To"
-                            context="{'group_by': 'assign_to'}"/>
-
-                    <filter name="group_status"
-                            string="Status"
-                            context="{'group_by': 'status'}"/>
-
-                    <filter name="group_due_date"
-                            string="Due Date"
-                            context="{'group_by': 'due_date'}"/>
-                </group>
+                <filter name="is_available" string="Available Tables" domain="[('state','=','available')]" />
             </search>
 
         </field>
-    </record>-->
-
-    <record id="tables_action" model="ir.actions.act_window">
-        <field name="name">restaurant table action</field>
-        <field name="res_model">restaurant.table</field>
     </record>
+
+
 
 </odoo>

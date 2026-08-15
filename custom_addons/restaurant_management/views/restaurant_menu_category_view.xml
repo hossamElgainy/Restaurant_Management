@@ -1,0 +1,53 @@
+<odoo>
+
+    <!-- Category Tree View -->
+    <record id="category_tree_view" model="ir.ui.view">
+        <field name="name">Category Tree View</field>
+        <field name="model">restaurant.menu.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Category Form View -->
+    <record id="category_form_view" model="ir.ui.view">
+        <field name="name">Category Form View</field>
+        <field name="model">restaurant.menu.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="name"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Items">
+
+                            <field name="item_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="price"/>
+                                    <field name="image"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+   <record id="restaurant_menu_category_view_search" model="ir.ui.view">
+        <field name="name">Restaurant Category Search</field>
+        <field name="model">restaurant.menu.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+</odoo>

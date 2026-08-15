@@ -1,13 +1,47 @@
 <odoo>
+
     <menuitem
-        id="restaurant_menu"
+        id="restaurant_root_menu"
         name="Restaurant"
     />
 
+    <record id="tables_action" model="ir.actions.act_window">
+        <field name="name">restaurant table action</field>
+        <field name="res_model">restaurant.table</field>
+    </record>
     <menuitem
         id="restaurant_management_menu"
         name="Tables"
-        parent="restaurant_menu"
+        parent="restaurant_root_menu"
         action="tables_action"
+    />
+    
+    <menuitem
+        id="restaurant_menu"
+        name="Menu"
+        parent="restaurant_root_menu"
+        sequence="20"
+    />
+
+    <record id="categories_action" model="ir.actions.act_window">
+        <field name="name">restaurant Categories action</field>
+        <field name="res_model">restaurant.menu.category</field>
+    </record>
+    <menuitem
+        id="restaurant_category_menu"
+        name="Categories"
+        parent="restaurant_menu"
+        action="categories_action"
+    />
+
+    <record id="items_action" model="ir.actions.act_window">
+        <field name="name">restaurant Items action</field>
+        <field name="res_model">restaurant.menu.item</field>
+    </record>
+    <menuitem
+        id="restaurant_item_menu"
+        name="Items"
+        parent="restaurant_menu"
+        action="items_action"
     />
 </odoo>

@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_restaurant_table,access_restaurant_table,model_restaurant_table,,1,1,1,1
+access_restaurant_menu_category,access_restaurant_menu_category,model_restaurant_menu_category,,1,1,1,1
+access_restaurant_menu_item,access_restaurant_menu_item,model_restaurant_menu_item,,1,1,1,1
