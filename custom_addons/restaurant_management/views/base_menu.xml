@@ -1,0 +1,13 @@
+<odoo>
+    <menuitem
+        id="restaurant_menu"
+        name="Restaurant"
+    />
+
+    <menuitem
+        id="restaurant_management_menu"
+        name="Tables"
+        parent="restaurant_menu"
+        action="tables_action"
+    />
+</odoo>

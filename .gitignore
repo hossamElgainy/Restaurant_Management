@@ -1,0 +1,9 @@
+# Ignore the official Odoo source
+restaurant_base/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
