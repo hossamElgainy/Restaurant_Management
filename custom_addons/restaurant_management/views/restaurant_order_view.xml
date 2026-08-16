@@ -1,6 +1,6 @@
 <odoo>
     <record id="restaurant_order_tree_view" model="ir.ui.view">
-        <field name="name">Restaurant Order</field>
+        <field name="name">Restaurant Order Tree</field>
         <field name="model">restaurant.order</field>
         <field name="arch" type="xml">
             <tree>
@@ -8,16 +8,27 @@
                 <field name="customer_id"/>
                 <field name="table_id"/>
                 <field name="order_date"/>
+                <field name="state"/>
                 <field name="total_amount"/>
             </tree>
         </field>
     </record>
     <record id="restaurant_order_form_view" model="ir.ui.view">
-         <field name="name">Restaurant Order</field>
+         <field name="name">Restaurant Order Form</field>
         <field name="model">restaurant.order</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <header>
+                        <button name="unlink" string="Delete" type="object" class="btn-danger" invisible="state != 'draft'"/>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                        <button name="action_start_preparing" string="Preparing" type="object" class="btn-primary" invisible="state != 'confirmed'"/>
+                        <button name="action_mark_ready" string="Mark Ready" type="object" class="btn-primary" invisible="state != 'preparing'"/>
+                        <button name="action_serve" string="Serve" type="object" class="btn-primary" invisible="state != 'ready'"/>
+                        <button name="action_pay" string="Pay" type="object" class="btn-primary" invisible="state != 'served'"/>
+                        <button name="action_cancel" string="Cancel" type="object" class="btn-danger" invisible="state in ('paid', 'cancelled')"/>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,confirmed,preparing,ready,served,paid,cancelled"/>
+                    </header>
                     <group>
                         <field name="order_no"/>
                         <field name="order_date"/>
@@ -26,6 +37,7 @@
                         <field name="customer_id"/>
                         <field name="table_id"/>
                         <field name="waiter_id"/>
+                        <field name="state"/>
                     </group>
                     <notebook>
                         <page string="Items">
@@ -56,21 +68,10 @@
                 <field name="waiter_id"/>
                 <field name="table_id"/>
                 <group string="Group By">
-                    <filter
-                        string="Customer"
-                        name="group_by_customer"
-                        context="{'group_by': 'customer_id'}"
-                    />
-                    <filter
-                        string="Waiter"
-                        name="group_by_waiter"
-                        context="{'group_by': 'waiter_id'}"
-                    />
-                    <filter
-                        string="Date"
-                        name="group_by_date"
-                        context="{'group_by': 'order_date'}"
-                    />
+                    <filter string="Customer" name="group_by_customer" context="{'group_by': 'customer_id'}"/>
+                    <filter string="Waiter" name="group_by_waiter" context="{'group_by': 'waiter_id'}"/>
+                    <filter string="State" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'order_date'}"/>
                 </group>
             </search>
         </field>

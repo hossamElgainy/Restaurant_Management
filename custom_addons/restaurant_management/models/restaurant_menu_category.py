@@ -1,4 +1,4 @@
-from odoo import api, fields, models, tools
+from odoo import fields, models
 class RestaurantMenuCategory(models.Model):
     _name = 'restaurant.menu.category'
     _description = 'Restaurant Menu Category'
