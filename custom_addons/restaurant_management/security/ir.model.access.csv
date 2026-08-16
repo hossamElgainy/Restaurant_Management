@@ -4,3 +4,4 @@ access_restaurant_menu_category,access_restaurant_menu_category,model_restaurant
 access_restaurant_menu_item,access_restaurant_menu_item,model_restaurant_menu_item,,1,1,1,1
 access_restaurant_order,access_restaurant_order,model_restaurant_order,,1,1,1,1
 access_restaurant_order_line,access_restaurant_order_line,model_restaurant_order_line,,1,1,1,1
+access_restaurant_reservation,access_restaurant_reservation,model_restaurant_reservation,,1,1,1,1

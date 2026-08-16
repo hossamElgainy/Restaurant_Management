@@ -1,0 +1,73 @@
+<odoo>
+    <record id="restaurant_reservation_tree_view" model="ir.ui.view">
+        <field name="name">Restaurant Reservation Tree View</field>
+        <field name="model">restaurant.reservation</field>
+        <field name="arch" type="xml">
+
+            <tree>
+
+                <field name="customer_id"/>
+                <field name="guests"/>
+                <field name="table_id"/>
+                <field name="reservation_date"/>
+                <field name="start_datetime"/>
+                <field name="end_datetime"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="restaurant_reservation_form_view" model="ir.ui.view">
+        <field name="name">Restaurant Reservation Form View</field>
+        <field name="model">restaurant.reservation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_pending" string="Pending" type="object" class="btn-primary" invisible="state == 'pending'"/>
+                    <button name="action_confirmed" string="Confirm" type="object" class="btn-primary" invisible="state != 'pending'"/>
+                    <button name="action_cancelled" string="Cancel" type="object" class="btn-danger" invisible="state == 'cancelled'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="customer_id"/>
+                         <field name="reservation_date"/>
+                        <field name="start_datetime" readonly="not reservation_date"/>
+                        <field name="end_datetime" readonly="not start_datetime"/>
+                    </group>
+                   <group>
+                       <field name="guests"/>
+                        <field name="table_id" readonly="not guests" domain="[('capacity', '>=', guests)]"/>
+                   </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="restaurant_reservation_search_view" model="ir.ui.view">
+        <field name="name">Restaurant Reservation Search View</field>
+        <field name="model">restaurant.reservation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="table_id"/>
+                <field name="state"/>
+                <field name="start_datetime"/>
+                <separator/>
+                <!--<filter string="Today"
+                    name="filter_today"
+                    domain="[
+                        ('start_date', '>=', context_today()),
+                        ('start_date', '&lt;', context_today() + relativedelta(days=1))
+                    ]"/>-->
+
+                <filter string="Confirmed" name="filter_confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Cancelled" name="filter_cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+
+                 <group string="Group By">
+                    <filter string="Table" name="group_by_table" context="{'group_by': 'table_id'}"/>
+                    <filter string="State" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

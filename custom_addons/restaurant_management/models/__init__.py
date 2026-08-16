@@ -4,3 +4,4 @@ from . import restaurant_menu_item
 from . import restaurant_customer
 from . import restaurant_order
 from . import restaurant_order_line
+from . import restaurant_reservation

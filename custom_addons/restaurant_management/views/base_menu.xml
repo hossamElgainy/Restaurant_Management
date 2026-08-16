@@ -26,6 +26,16 @@
         parent="restaurant_root_menu"
         action="orders_action"
     />
+    <record id="reservation_action" model="ir.actions.act_window">
+        <field name="name">restaurant reservation action</field>
+        <field name="res_model">restaurant.reservation</field>
+    </record>
+    <menuitem
+        id="restaurant_reservation_menu"
+        name="Reservations"
+        parent="restaurant_root_menu"
+        action="reservation_action"
+    />
 
     <menuitem
         id="restaurant_menu"
