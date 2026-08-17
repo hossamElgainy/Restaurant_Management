@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="restaurant_management.kitchen_screen">
+        <div class="kitchen-screen">
+            <!-- HEADER -->
+            <div class="kitchen-header">
+                <!-- TITLE -->
+                <div class="kitchen-title">
+                    <div class="kitchen-icon">🍳</div>
+                    <div>
+                        <h1>Kitchen Display</h1>
+                        <span class="kitchen-subtitle">Manage and prepare incoming orders</span>
+                    </div>
+                </div>
+                <!-- FILTERS -->
+                <div class="kitchen-filters">
+                    <button type="button" data-state="all" t-att-class="state.selectedState === 'all' ? 'filter-btn active' : 'filter-btn'" t-on-click="setFilter">All</button>
+                    <button type="button" data-state="confirmed" t-att-class="state.selectedState === 'confirmed' ? 'filter-btn active' : 'filter-btn'" t-on-click="setFilter">Confirmed</button>
+                    <button type="button" data-state="preparing" t-att-class="state.selectedState === 'preparing' ? 'filter-btn active' : 'filter-btn'" t-on-click="setFilter">Preparing</button>
+                    <button type="button" data-state="ready" t-att-class="state.selectedState === 'ready' ? 'filter-btn active' : 'filter-btn'" t-on-click="setFilter">Ready</button>
+                </div>
+                <!-- SUMMARY -->
+                <div class="kitchen-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">Active Orders</span>
+                        <span class="summary-value"><t t-esc="filteredOrders.length"/></span>
+                    </div>
+                </div>
+            </div>
+            <!-- LOADING -->
+            <t t-if="state.loading">
+                <div class="kitchen-loading">
+                    <div class="loading-spinner"></div>
+                    <span>Loading orders...</span>
+                </div>
+            </t>
+            <!-- ORDERS -->
+            <t t-else="">
+                <t t-if="filteredOrders.length">
+                    <div class="orders-container">
+                        <t t-foreach="filteredOrders" t-as="order" t-key="order.id">
+                            <div class="order-card">
+                                <!-- CARD HEADER -->
+                                <div class="order-card-header">
+                                    <div>
+                                        <span class="order-label">ORDER</span>
+                                        <h2><t t-esc="order.order_no"/></h2>
+                                    </div>
+                                    <!-- STATE -->
+                                    <span class="order-state" t-att-class="'state-' + order.state">
+                                        <t t-if="order.state === 'confirmed'">CONFIRMED</t>
+                                        <t t-elif="order.state === 'preparing'">PREPARING</t>
+                                        <t t-elif="order.state === 'ready'">READY</t>
+                                        <t t-else=""><t t-esc="order.state"/></t>
+                                    </span>
+                                </div>
+                                <!-- ORDER INFO -->
+                                <div class="order-info">
+                                    <!-- CUSTOMER -->
+                                    <div class="info-item">
+                                        <span class="info-label">Customer</span>
+                                        <span class="info-value">
+                                            <t t-if="order.customer"><t t-esc="order.customer"/></t>
+                                            <t t-else="">Walk-in Customer</t>
+                                        </span>
+                                    </div>
+                                    <!-- TABLE -->
+                                    <div class="info-item">
+                                        <span class="info-label">Table</span>
+                                        <span class="info-value table-value">
+                                            <span class="table-icon">🍽️</span>
+                                            <t t-if="order.table"><t t-esc="order.table"/></t>
+                                            <t t-else="">No Table</t>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- ORDER ITEMS -->
+                                <div class="order-items">
+                                    <div class="items-header">
+                                        <span>Order Items</span>
+                                        <span><t t-esc="order.lines.length"/> Items</span>
+                                    </div>
+                                    <div class="items-list">
+                                        <t t-foreach="order.lines" t-as="line" t-key="line.id">
+                                            <div class="order-line">
+                                                <div class="item-name">
+                                                    <span class="item-bullet">•</span>
+                                                    <span><t t-esc="line.item"/></span>
+                                                </div>
+                                                <div class="item-quantity">× <t t-esc="line.quantity"/></div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                <!-- FOOTER -->
+                                <div class="order-card-footer">
+                                    <!-- CONFIRMED -->
+                                    <t t-if="order.state === 'confirmed'">
+                                        <button type="button" class="kitchen-btn btn-preparing" t-on-click="() => startOrder(order.id)"><span>▶</span> Start Preparing</button>
+                                    </t>
+                                    <!-- PREPARING -->
+                                    <t t-if="order.state === 'preparing'">
+                                        <button type="button" class="kitchen-btn btn-ready" t-on-click="() => markReady(order.id)"><span>✓</span> Mark as Ready</button>
+                                    </t>
+                                    <!-- READY -->
+                                    <t t-if="order.state === 'ready'">
+                                        <button type="button" class="kitchen-btn btn-served" t-on-click="() => markServed(order.id)"><span>✓</span> Served</button>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <!-- EMPTY STATE -->
+                <t t-else="">
+                    <div class="empty-kitchen">
+                        <div class="empty-icon">🍽️</div>
+                        <h2>
+                            <t t-if="state.selectedState === 'all'">No Active Orders</t>
+                            <t t-else="">
+                                No
+                                <t t-if="state.selectedState === 'confirmed'">Confirmed</t>
+                                <t t-elif="state.selectedState === 'preparing'">Preparing</t>
+                                <t t-elif="state.selectedState === 'ready'">Ready</t>
+                                Orders
+                            </t>
+                        </h2>
+                        <p>
+                            <t t-if="state.selectedState === 'all'">There are currently no orders waiting in the kitchen.</t>
+                            <t t-else="">There are currently no orders in this status.</t>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </div>
+    </t>
+</templates>

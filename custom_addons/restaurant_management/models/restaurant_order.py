@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError
 
 class RestaurantOrder(models.Model):
     _name = 'restaurant.order'
+    _description = 'Restaurant Order'
 
     order_no  = fields.Char(string='Order No',readonly=True,default='NEW',required=True,copy=False)
     customer_id = fields.Many2one('res.partner', string='Customer', domain=[('is_restaurant_customer', '=', True)])
@@ -90,3 +91,52 @@ class RestaurantOrder(models.Model):
                 )
 
         return super().unlink()
+
+    @api.model
+    def get_kitchen_orders(self):
+
+        orders = self.search(
+            [
+                (
+                    'state',
+                    'in',
+                    ['confirmed', 'preparing', 'ready']
+                )
+            ],
+            order='order_date asc',
+        )
+
+        return [
+            {
+                'id': order.id,
+                'order_no': order.order_no,
+                'order_date':order.order_date,
+                'customer': (
+                    order.customer_id.name
+                    if order.customer_id
+                    else 'Walk-in Customer'
+                ),
+
+                'table': (
+                    order.table_id.name
+                    if order.table_id
+                    else 'No Table'
+                ),
+
+                'state': order.state,
+
+                'lines': [
+                    {
+                        'id': line.id,
+                        'item': (
+                            line.item_id.name
+                            if line.item_id
+                            else 'Unknown Item'
+                        ),
+                        'quantity': line.quantity,
+                    }
+                    for line in order.order_line_ids
+                ],
+            }
+            for order in orders
+        ]

@@ -89,4 +89,16 @@
         parent="restaurant_root_menu"
         action="customers_action"
     />
+
+
+    <record id="action_kitchen_screen" model="ir.actions.client">
+        <field name="name">Kitchen</field>
+        <field name="tag">restaurant_management.kitchen_screen</field>
+    </record>
+    <menuitem
+        id="menu_kitchen_screen"
+        name="Kitchen"
+        action="action_kitchen_screen"
+        parent="restaurant_root_menu"
+    />
 </odoo>
