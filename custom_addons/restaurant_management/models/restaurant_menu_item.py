@@ -12,8 +12,13 @@ class RestaurantMenuItem(models.Model):
     description = fields.Text()
     image = fields.Binary()
     available = fields.Boolean(default=True)
-
-
+    modifier_ids = fields.Many2many(
+        'restaurant.menu.modifier',
+        'restaurant_menu_item_modifier_rel',
+        'item_id',
+        'modifier_id',
+        string='Modifiers'
+    , domain=[('available', '=', True)])
     @api.constrains('price')
     def _check_price(self):
         for item in self:

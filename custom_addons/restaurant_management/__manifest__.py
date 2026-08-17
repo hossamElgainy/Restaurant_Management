@@ -13,7 +13,8 @@
         'views/restaurant_customer_view.xml',
         'data/ir_sequence_data.xml',
         'views/restaurant_order_view.xml',
-        'views/restaurant_reservation_view.xml'
+        'views/restaurant_reservation_view.xml',
+        'views/restaurant_menu_modifier_view.xml',
     ],
     'assets': {
         'web.assets_backend': [

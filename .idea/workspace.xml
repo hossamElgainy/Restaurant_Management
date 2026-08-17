@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a614d625-f2f7-48b7-b3ab-ad6614f9bdd8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/static/src/componants/kitchen/kitchen_screen.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/static/src/componants/kitchen/kitchen_screen.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/static/src/componants/kitchen/kitchen_screen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/models/restaurant_menu_modifier.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/views/restaurant_menu_modifier_view.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/__manifest__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/models/restaurant_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/models/restaurant_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/models/restaurant_menu_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/models/restaurant_menu_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/security/ir.model.access.csv" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/security/ir.model.access.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/static/src/componants/kitchen/kitchen_screen.js" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/static/src/componants/kitchen/kitchen_screen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/static/src/componants/kitchen/kitchen_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/static/src/componants/kitchen/kitchen_screen.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/views/base_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/views/base_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_addons/restaurant_management/views/restaurant_menu_item_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/custom_addons/restaurant_management/views/restaurant_menu_item_view.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/restaurant_base/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/restaurant_base/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

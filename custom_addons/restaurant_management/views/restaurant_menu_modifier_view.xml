@@ -1,0 +1,57 @@
+<odoo>
+
+    <record id="item_modifier_tree_view" model="ir.ui.view">
+        <field name="name">Item Modifier Tree View</field>
+        <field name="model">restaurant.menu.modifier</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="price"/>
+                <field name="available"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="item_modifier_form_view" model="ir.ui.view">
+        <field name="name">Item Modifier Form View</field>
+        <field name="model">restaurant.menu.modifier</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="price"/>
+                        <field name="available"/>
+                    </group>
+                    <notebook>
+                        <page string="Items">
+                            <field name="item_ids">
+                                <tree editable="button">
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+   <record id="restaurant_menu_item_modifier_view_search" model="ir.ui.view">
+        <field name="name">Restaurant Item Modifier Search</field>
+        <field name="model">restaurant.menu.modifier</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="Available" string="Available Modifier" domain="[('available','=',True)]" />
+                <group string="Group By">
+                    <filter
+                        string="Item"
+                        name="group_by_item"
+                        context="{'group_by': 'item_ids'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

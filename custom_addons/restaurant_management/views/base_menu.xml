@@ -65,6 +65,16 @@
         parent="restaurant_menu"
         action="items_action"
     />
+    <record id="modifier_action" model="ir.actions.act_window">
+        <field name="name">restaurant modifier action</field>
+        <field name="res_model">restaurant.menu.modifier</field>
+    </record>
+    <menuitem
+        id="restaurant_item_modifier_menu"
+        name="Modifiers"
+        parent="restaurant_menu"
+        action="modifier_action"
+    />
 
     <record id="customers_action" model = "ir.actions.act_window">
         <field name="name">Customers Action</field>

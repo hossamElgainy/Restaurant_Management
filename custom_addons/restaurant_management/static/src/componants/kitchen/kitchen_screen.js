@@ -18,7 +18,7 @@ export class KitchenScreen extends Component {
             await this.loadOrders();
             this.interval = setInterval(
                 () => this.loadOrders(),
-                600000
+                60000
             );
         });
 
@@ -84,19 +84,6 @@ export class KitchenScreen extends Component {
         await this.orm.call(
             "restaurant.order",
             "action_mark_ready",
-            [[orderId]]
-        );
-        await this.loadOrders();
-    }
-
-    markServed = async (orderId) => {
-        if (!this.orm) {
-            console.error("ORM service not available");
-            return;
-        }
-        await this.orm.call(
-            "restaurant.order",
-            "action_serve",
             [[orderId]]
         );
         await this.loadOrders();
