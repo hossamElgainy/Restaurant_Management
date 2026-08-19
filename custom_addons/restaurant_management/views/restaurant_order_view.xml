@@ -13,51 +13,96 @@
             </tree>
         </field>
     </record>
+
     <record id="restaurant_order_form_view" model="ir.ui.view">
-         <field name="name">Restaurant Order Form</field>
+        <field name="name">Restaurant Order Form</field>
         <field name="model">restaurant.order</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="unlink" string="Delete" type="object" class="btn-danger" invisible="state != 'draft'"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_start_preparing" string="Preparing" type="object" class="btn-primary" invisible="state != 'confirmed'"/>
+                    <button name="action_mark_ready" string="Mark Ready" type="object" class="btn-primary" invisible="state != 'preparing'"/>
+                    <button name="action_serve" string="Serve" type="object" class="btn-primary" invisible="state != 'ready'"/>
+                    <button name="action_pay" string="Pay" type="object" class="btn-primary" invisible="state != 'served'"/>
+                    <button name="action_cancel" string="Cancel" type="object" class="btn-danger" invisible="state in ('paid', 'cancelled')"/>
+                    <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,confirmed,preparing,ready,served,paid,cancelled"/>
+                </header>
+
                 <sheet>
-                    <header>
-                        <button name="unlink" string="Delete" type="object" class="btn-danger" invisible="state != 'draft'"/>
-                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary" invisible="state != 'draft'"/>
-                        <button name="action_start_preparing" string="Preparing" type="object" class="btn-primary" invisible="state != 'confirmed'"/>
-                        <button name="action_mark_ready" string="Mark Ready" type="object" class="btn-primary" invisible="state != 'preparing'"/>
-                        <button name="action_serve" string="Serve" type="object" class="btn-primary" invisible="state != 'ready'"/>
-                        <button name="action_pay" string="Pay" type="object" class="btn-primary" invisible="state != 'served'"/>
-                        <button name="action_cancel" string="Cancel" type="object" class="btn-danger" invisible="state in ('paid', 'cancelled')"/>
-                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,confirmed,preparing,ready,served,paid,cancelled"/>
-                    </header>
                     <group>
-                        <field name="order_no"/>
-                        <field name="order_date"/>
+                        <group>
+                            <field name="order_no"/>
+                            <field name="order_date"/>
+                        </group>
+                        <group>
+                            <field name="customer_id"/>
+                            <field name="table_id"/>
+                            <field name="waiter_id"/>
+                        </group>
                     </group>
-                    <group>
-                        <field name="customer_id"/>
-                        <field name="table_id"/>
-                        <field name="waiter_id"/>
-                        <field name="state"/>
-                    </group>
+
                     <notebook>
                         <page string="Items">
-                             <field name="order_line_ids">
+                            <field name="order_line_ids">
                                 <tree editable="bottom">
                                     <field name="item_id"/>
+                                    <field name="modifier_ids" widget="many2many_tags"/>
                                     <field name="quantity"/>
+                                    <field name="base_price"/>
+                                    <field name="modifier_amount"/>
                                     <field name="unit_price"/>
                                     <field name="subtotal"/>
                                 </tree>
                             </field>
                         </page>
+
+                        <page string="Payments">
+                            <field name="payment_ids">
+                                <tree editable="bottom">
+                                    <field name="payment_date"/>
+                                    <field name="payment_method"/>
+                                    <field name="amount"/>
+                                    <field name="currency_id"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
-                    <group class="oe_subtotal_footer">
-                        <field name="total_amount"/>
+
+                    <group>
+                        <group string="Order Summary">
+                            <field name="subtotal" readonly="1"/>
+                            <field name="discount" readonly="state != 'draft'"/>
+                        </group>
+                        <group string="Net">
+                            <field name="net_amount" string="Net" readonly="1"/>
+                        </group>
+                        <group string="Charges">
+                            <field name="tax" readonly="state != 'draft'"/>
+                            <field name="service" readonly="state != 'draft'"/>
+                            <separator string="Total"/>
+                            <field name="total_amount" readonly="1" class="oe_subtotal_footer"/>
+                        </group>
+                    </group>
+
+                    <!-- ================================================= -->
+                    <!-- PAYMENT SUMMARY -->
+                    <!-- ================================================= -->
+                    <group>
+                        <group string="Payment Summary">
+                            <field name="paid" readonly="1"/>
+                            <field name="remaining" readonly="1"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
+
+    <!-- ===================================================== -->
+    <!-- ORDER SEARCH VIEW -->
+    <!-- ===================================================== -->
     <record id="restaurant_order_search_view" model="ir.ui.view">
         <field name="name">Restaurant Order Search</field>
         <field name="model">restaurant.order</field>
@@ -67,6 +112,7 @@
                 <field name="customer_id"/>
                 <field name="waiter_id"/>
                 <field name="table_id"/>
+                <field name="state"/>
                 <group string="Group By">
                     <filter string="Customer" name="group_by_customer" context="{'group_by': 'customer_id'}"/>
                     <filter string="Waiter" name="group_by_waiter" context="{'group_by': 'waiter_id'}"/>

@@ -1,7 +1,6 @@
 
-from odoo import fields, models,api
-
-from restaurant_base.odoo.exceptions import ValidationError
+from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class RestaurantTable(models.Model):
@@ -11,11 +10,6 @@ class RestaurantTable(models.Model):
     name = fields.Char(required=True)
     capacity = fields.Integer(required=True)
     location = fields.Char(required=True)
-    state = fields.Selection([
-        ('available', 'Available'),
-        ('reserved', 'Reserved'),
-        ('occupied', 'Occupied'),
-    ], default='available')
 
     @api.constrains('capacity')
     def _check_capacity(self):

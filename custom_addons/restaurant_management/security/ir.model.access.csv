@@ -6,3 +6,4 @@ access_restaurant_order,access_restaurant_order,model_restaurant_order,,1,1,1,1
 access_restaurant_order_line,access_restaurant_order_line,model_restaurant_order_line,,1,1,1,1
 access_restaurant_reservation,access_restaurant_reservation,model_restaurant_reservation,,1,1,1,1
 access_restaurant_menu_modifier,access_restaurant_menu_modifier,model_restaurant_menu_modifier,,1,1,1,1
+access_restaurant_payment,access_restaurant_payment,model_restaurant_payment,,1,1,1,1

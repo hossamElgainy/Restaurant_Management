@@ -1,0 +1,35 @@
+<odoo>
+
+    <record id="restaurant_payment_tree_view" model="ir.ui.view">
+        <field name="name">Restaurant Payment Tree</field>
+        <field name="model">restaurant.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="amount"/>
+                <field name="currency_id"/>
+                <field name="payment_method"/>
+                <field name="payment_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="restaurant_payment_form_view" model="ir.ui.view">
+        <field name="name">Restaurant Payment Form</field>
+        <field name="model">restaurant.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="amount"/>
+                        <field name="currency_id"/>
+                        <field name="payment_method"/>
+                        <field name="payment_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

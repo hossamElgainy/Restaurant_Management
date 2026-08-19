@@ -6,3 +6,4 @@ from . import restaurant_order
 from . import restaurant_order_line
 from . import restaurant_reservation
 from . import restaurant_menu_modifier
+from . import restaurant_payment

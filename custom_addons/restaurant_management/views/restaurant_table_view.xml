@@ -7,7 +7,6 @@
                 <field name="name"/>
                 <field name="capacity"/>
                 <field name="location"/>
-                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -23,7 +22,6 @@
                         <field name="name"/>
                         <field name="capacity"/>
                         <field name="location"/>
-                        <field name="state"/>
                     </group>
 
                 </sheet>
@@ -37,12 +35,8 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <filter name="is_available" string="Available Tables" domain="[('state','=','available')]" />
             </search>
 
         </field>
     </record>
-
-
-
 </odoo>
