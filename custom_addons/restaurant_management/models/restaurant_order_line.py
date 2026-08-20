@@ -24,10 +24,6 @@ class RestaurantOrderLine(models.Model):
         string='Modifiers',
     )
 
-    # ---------------------------------------------------------
-    # PRICES
-    # ---------------------------------------------------------
-
     base_price = fields.Float(
         string='Base Price',
         readonly=True,
@@ -60,20 +56,12 @@ class RestaurantOrderLine(models.Model):
         store=True,
     )
 
-    # ---------------------------------------------------------
-    # MODIFIER AMOUNT
-    # ---------------------------------------------------------
-
     @api.depends('modifier_ids', 'modifier_ids.price')
     def _compute_modifier_amount(self):
         for line in self:
             line.modifier_amount = sum(
                 line.modifier_ids.mapped('price')
             )
-
-    # ---------------------------------------------------------
-    # UNIT PRICE
-    # ---------------------------------------------------------
 
     @api.depends('base_price', 'modifier_amount')
     def _compute_unit_price(self):
@@ -82,10 +70,6 @@ class RestaurantOrderLine(models.Model):
                 line.base_price + line.modifier_amount
             )
 
-    # ---------------------------------------------------------
-    # SUBTOTAL
-    # ---------------------------------------------------------
-
     @api.depends('quantity', 'unit_price')
     def _compute_subtotal(self):
         for line in self:
@@ -93,15 +77,8 @@ class RestaurantOrderLine(models.Model):
                 line.quantity * line.unit_price
             )
 
-    # ---------------------------------------------------------
-    # ITEM ONCHANGE
-    # ---------------------------------------------------------
-
     @api.onchange('item_id')
     def _onchange_item_id(self):
-
-        # When changing the item,
-        # remove previously selected modifiers.
         self.modifier_ids = [(5, 0, 0)]
 
         if not self.item_id:
@@ -114,7 +91,6 @@ class RestaurantOrderLine(models.Model):
                 }
             }
 
-        # The base price ALWAYS comes from the menu item.
         self.base_price = self.item_id.price
 
         return {
@@ -128,10 +104,6 @@ class RestaurantOrderLine(models.Model):
                 ]
             }
         }
-
-    # ---------------------------------------------------------
-    # CREATE
-    # ---------------------------------------------------------
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -149,10 +121,6 @@ class RestaurantOrderLine(models.Model):
                 vals['base_price'] = item.price
 
         return super().create(vals_list)
-
-    # ---------------------------------------------------------
-    # WRITE
-    # ---------------------------------------------------------
 
     def write(self, vals):
 
@@ -174,10 +142,6 @@ class RestaurantOrderLine(models.Model):
 
         return super().write(vals)
 
-    # ---------------------------------------------------------
-    # QUANTITY VALIDATION
-    # ---------------------------------------------------------
-
     @api.constrains('quantity')
     def _check_quantity(self):
 
@@ -189,10 +153,6 @@ class RestaurantOrderLine(models.Model):
                     f'Quantity of {line.item_id.name} '
                     f'must be greater than 0.'
                 )
-
-    # ---------------------------------------------------------
-    # MODIFIER VALIDATION
-    # ---------------------------------------------------------
 
     @api.constrains('item_id', 'modifier_ids')
     def _check_modifiers(self):

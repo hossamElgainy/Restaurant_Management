@@ -19,6 +19,7 @@ class RestaurantMenuItem(models.Model):
         'modifier_id',
         string='Modifiers'
     , domain=[('available', '=', True)])
+    promotion_ids = fields.Many2many('restaurant.promotion', string='Promotions')
     @api.constrains('price')
     def _check_price(self):
         for item in self:

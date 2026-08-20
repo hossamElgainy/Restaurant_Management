@@ -16,6 +16,7 @@
         'views/restaurant_reservation_view.xml',
         'views/restaurant_menu_modifier_view.xml',
         'views/restaurant_payment_view.xml',
+        'views/restaurant_promotion_view.xml',
     ],
     'assets': {
         'web.assets_backend': [

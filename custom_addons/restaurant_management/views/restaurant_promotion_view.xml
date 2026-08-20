@@ -1,0 +1,90 @@
+<odoo>
+    <record id="restaurant_promotion_tree_view" model="ir.ui.view">
+        <field name="name">Restaurant Promotion Tree</field>
+        <field name="model">restaurant.promotion</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="target_type"/>
+                <field name="discount"/>
+                <field name="priority"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="restaurant_promotion_form_view" model="ir.ui.view">
+        <field name="name">Restaurant Promotion Form</field>
+        <field name="model">restaurant.promotion</field>
+        <field name="arch" type="xml">
+            <form>
+            <sheet>
+
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="type"/>
+                        <field name="target_type" invisible="not type"/>
+                    </group>
+
+                    <group>
+                        <field name="category_id" invisible="target_type != 'category'"/>
+                    </group>
+                </group>
+
+                <notebook>
+
+                    <page string="Items" invisible="target_type != 'items'">
+                        <field name="item_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="category_id"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string="Days">
+                        <field name="day_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+
+                </notebook>
+
+                <group>
+                    <field name="discount" invisible="type != 'percentage'"/>
+                    <field name="pay" invisible="type != 'buy_x_get_y'"/>
+                    <field name="get" invisible="type != 'buy_x_get_y'"/>
+                    <field name="priority"/>
+                </group>
+
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+
+            </sheet>
+        </form>
+        </field>
+    </record>
+
+
+    <record id="restaurant_promotion_search_view" model="ir.ui.view">
+        <field name="name">Restaurant Promotion Search</field>
+        <field name="model">restaurant.promotion</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="target_type"/>
+                <group string="Group By">
+                    <filter string="Discount Type" name="group_by_discount_type" context="{'group_by': 'type'}"/>
+                    <filter string="Target" name="group_by_target_type" context="{'group_by': 'target_type'}"/>
+                    <filter string="Category" name="group_by_category" context="{'group_by': 'category_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

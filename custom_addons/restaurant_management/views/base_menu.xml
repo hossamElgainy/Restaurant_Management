@@ -111,4 +111,31 @@
         action="action_kitchen_screen"
         parent="restaurant_root_menu"
     />
+
+
+    <menuitem
+        id="promotions_base_menu"
+        name="Promotions"
+        parent="restaurant_root_menu"
+    />
+    <record id="promotion_days_action" model="ir.actions.act_window">
+        <field name="name">restaurant promotion day action</field>
+        <field name="res_model">restaurant.promotion.day</field>
+    </record>
+    <menuitem
+        id="promotion_days_menu"
+        name="Promotion Days"
+        parent="promotions_base_menu"
+        action="promotion_days_action"
+    />
+    <record id="promotion_action" model="ir.actions.act_window">
+        <field name="name">restaurant promotion action</field>
+        <field name="res_model">restaurant.promotion</field>
+    </record>
+    <menuitem
+        id="promotions_menu"
+        name="Promotions"
+        parent="promotions_base_menu"
+        action="promotion_action"
+    />
 </odoo>
